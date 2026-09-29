@@ -1,0 +1,6 @@
+{
+  "name": "Chanty Acudetox",
+  "description": "Acudetox NADA 5-point protocol ear acupuncture and nervous system reset sessions with Chanty in Swakopmund, Namibia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
