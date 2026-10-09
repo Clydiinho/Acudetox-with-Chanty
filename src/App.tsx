@@ -5,15 +5,17 @@
 
 import React from 'react';
 import { LanguageProvider, useLanguage } from './LanguageContext';
-import { AnimationSequence } from './components/AnimationSequence';
+import { SpotlightReveal } from './components/SpotlightReveal';
+import { BenefitsSection } from './components/BenefitsSection';
 import { EarMotif, StressIcon, SleepIcon, BalanceIcon, ResetIcon } from './components/Icons';
 import { BackgroundTexture } from './components/BackgroundTexture';
+import { Footer } from './components/Footer';
 
 const Nav = () => {
   const { language, setLanguage, t } = useLanguage();
   return (
     <nav className="fixed top-8 left-4 right-4 md:top-12 md:left-8 md:right-8 z-50 px-6 py-4 flex justify-between items-center bg-[#b5faff3b] backdrop-blur-2xl border border-[#00000015] shadow-[inset_0_1px_4px_1px_#ffffff55] text-charcoal">
-      <div className="font-serif italic text-xl tracking-wide">Chanty</div>
+      <div className="font-heading italic text-2xl md:text-3xl tracking-wide">Chanty</div>
       <div className="flex items-center gap-6 text-xs md:text-sm tracking-widest uppercase">
         <button 
           onClick={() => setLanguage(language === 'en' ? 'af' : 'en')}
@@ -32,17 +34,28 @@ const Nav = () => {
 const Hero = () => {
   const { t } = useLanguage();
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-12 relative text-center">
+    <section className="flex flex-col items-center justify-center px-6 pt-16 sm:pt-20 md:pt-24 pb-0 relative text-center z-40">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-charcoal mb-8 leading-tight">
-          <span className="italic text-terracotta">{t('hero.headline.reset')}</span>{t('hero.headline.rest1')}
-          <br />
-          {t('hero.headline.rest2')}
+        <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[7.25rem] text-charcoal mb-3 md:mb-4 tracking-tight flex flex-col items-center select-none leading-none">
+          <span className="inline-flex items-baseline justify-center leading-[0.88] md:leading-[0.82]">
+            <span 
+              className="glitch-reset font-heading italic text-terracotta drop-shadow-[0_2px_12px_rgba(193,127,89,0.18)]"
+              data-text={t('hero.headline.reset')}
+            >
+              {t('hero.headline.reset')}
+            </span>
+            <span className="ml-2 sm:ml-3 md:ml-4 font-serif font-normal not-italic text-charcoal">
+              {t('hero.headline.rest1').trim()}
+            </span>
+          </span>
+          <span className="block leading-[0.88] md:leading-[0.82] font-serif font-normal not-italic tracking-[-0.02em] text-charcoal -mt-1 sm:-mt-2 md:-mt-3 lg:-mt-4">
+            {t('hero.headline.rest2')}
+          </span>
         </h1>
-        <p className="text-xl md:text-2xl text-charcoal font-medium font-sans max-w-2xl mb-12 leading-relaxed tracking-wide">
+        <p className="text-xl md:text-2xl text-charcoal/90 font-medium font-sans max-w-2xl mb-3 md:mb-4 leading-relaxed tracking-wide">
           {t('hero.subheading')}
         </p>
-        <div className="btn-wrapper mt-4">
+        <div className="btn-wrapper mt-1">
           <a href="#book" className="btn text-center">
             <div className="txt-box">
               <span className="txt">{t('hero.cta')}</span>
@@ -54,14 +67,9 @@ const Hero = () => {
             <div className="point bottom left"></div>
             <div className="point bottom right"></div>
           </a>
-          <span className="txt-secondary" id="hint1">Hover me</span>
-          <span className="txt-secondary" id="hint2">Click me</span>
+          <span className="txt-secondary" id="hint1">{t('hero.hint.hover')}</span>
+          <span className="txt-secondary" id="hint2">{t('hero.hint.click')}</span>
         </div>
-      </div>
-      <div className="absolute bottom-10 animate-bounce text-sage">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 5v14M19 12l-7 7-7-7"/>
-        </svg>
       </div>
     </section>
   );
@@ -70,69 +78,34 @@ const Hero = () => {
 const WhatIsAcudetox = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-24 px-6 bg-white/50">
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-serif mb-8 text-sage">{t('acudetox.title')}</h2>
-        <p className="text-lg text-charcoal/80 leading-relaxed mb-6">
-          {t('acudetox.p1')}
-        </p>
-        <p className="text-lg text-charcoal/80 leading-relaxed">
-          {t('acudetox.p2')}
-        </p>
-      </div>
-    </section>
-  );
-};
-
-const Benefits = () => {
-  const { t } = useLanguage();
-  
-  const benefits = [
-    { 
-      id: 'stress', 
-      image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80'
-    },
-    { 
-      id: 'sleep', 
-      image: 'https://images.unsplash.com/photo-1511293714539-34208a0d2448?auto=format&fit=crop&w=400&q=80'
-    },
-    { 
-      id: 'balance', 
-      image: 'https://images.unsplash.com/photo-1528315758117-e7f0b5d8f6d6?auto=format&fit=crop&w=400&q=80'
-    },
-    { 
-      id: 'reset', 
-      image: 'https://images.unsplash.com/photo-1473220464591-628d63c46761?auto=format&fit=crop&w=400&q=80'
-    },
-  ];
-
-  return (
-    <section className="py-24 px-6 bg-sage relative z-10">
+    <section className="py-20 md:py-28 px-6 bg-[#d3cabb] relative z-10 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-center mb-16 text-charcoal">
-          <span className="font-sans font-medium">{t('benefits.title.part1')}</span>{' '}
-          <span className="font-serif italic">{t('benefits.title.part2')}</span>
-        </h2>
-        
-        {/* Horizontal layout container */}
-        <div className="flex flex-row overflow-x-auto gap-8 py-12 snap-x justify-start md:justify-center px-8 -mx-4 md:mx-0 hide-scrollbar">
-          {benefits.map((b) => (
-            <div 
-              key={b.id} 
-              className="shrink-0 flex flex-col w-[190px] h-[254px] rounded-[30px] bg-[#8DA399] shadow-[15px_15px_30px_#6f827a,-15px_-15px_30px_#abc6ba] overflow-hidden snap-center transition-all duration-300 hover:shadow-none hover:scale-95 cursor-pointer"
-            >
-              {/* Top Half: Image */}
-              <div className="h-1/2 w-full">
-                <img src={b.image} alt={t(`benefits.${b.id}`)} className="w-full h-full object-cover" />
-              </div>
-              {/* Bottom Half: Title */}
-              <div className="h-1/2 w-full p-4 flex items-center justify-center text-center">
-                <h3 className="text-charcoal text-lg font-bold leading-snug px-1">
-                  {t(`benefits.${b.id}`)}
-                </h3>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+          <div className="flex flex-col text-left">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 text-charcoal">
+              <span className="font-sans font-medium">{t('acudetox.title.part1')}</span>{' '}
+              <span className="font-heading italic">{t('acudetox.title.part2')}</span>
+            </h2>
+            <div className="text-left flex flex-col items-start">
+              <p className="text-sm sm:text-base text-charcoal/85 leading-relaxed mb-4">
+                {t('acudetox.p1')}
+              </p>
+              <p className="text-sm sm:text-base text-charcoal/85 leading-relaxed">
+                {t('acudetox.p2')}
+              </p>
             </div>
-          ))}
+          </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-charcoal/10 bg-[#d3cabb]">
+            <video
+              src="/Line_art_ear_body_animation_20260929144105.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-auto aspect-video object-cover rounded-2xl"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -154,7 +127,7 @@ const MeetChanty = () => {
         <div>
           <h2 className="text-4xl md:text-5xl mb-6 text-charcoal">
             <span className="font-sans font-medium">{t('meet.title.part1')}</span>{' '}
-            <span className="font-serif italic">{t('meet.title.part2')}</span>
+            <span className="font-heading italic">{t('meet.title.part2')}</span>
           </h2>
           <p className="text-lg text-charcoal/80 leading-relaxed mb-6">
             {t('meet.bio')}
@@ -174,102 +147,104 @@ const MeetChanty = () => {
 const Pricing = () => {
   const { t } = useLanguage();
   return (
-    <section className="py-24 px-6 text-center bg-white/30 backdrop-blur-md relative z-10">
-      <h2 className="text-4xl md:text-5xl font-serif italic mb-12 text-charcoal">{t('pricing.title')}</h2>
-      
-      <div className="card-universe-wrapper">
-        <div className="parallax-container">
-          {/* The tracking grid */}
-          <div className="tracker tr-1"></div>
-          <div className="tracker tr-2"></div>
-          <div className="tracker tr-3"></div>
-          <div className="tracker tr-4"></div>
-          <div className="tracker tr-5"></div>
-          <div className="tracker tr-6"></div>
-          <div className="tracker tr-7"></div>
-          <div className="tracker tr-8"></div>
-          <div className="tracker tr-9"></div>
-          
-          <div className="tilt-card text-left">
-            <div className="glare"></div>
-            <div className="card-front">
-              <div className="card-header">
-                <div className="text-white font-bold text-2xl tracking-widest">N$900</div>
-                <svg className="nfc-icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M11 20a1 1 0 0 1-1-1v-4a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1zm4-6a1 1 0 0 1-1-1v-6a1 1 0 1 1 2 0v6a1 1 0 0 1-1 1zm-8 4a1 1 0 0 1-1-1V9a1 1 0 1 1 2 0v8a1 1 0 0 1-1 1zm12-8a1 1 0 0 1-1-1V5a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1z" />
-                </svg>
-              </div>
-              
-              <div className="chip-container">
-                <div className="chip">
-                  <div className="chip-line"></div>
-                  <div className="chip-line"></div>
-                  <div className="chip-line"></div>
-                  <div className="chip-main"></div>
-                </div>
-                <div className="card-type uppercase">PACKAGE</div>
-              </div>
-              
-              <div className="card-numbers embossed text-white">
-                <span>2x</span>
-                <span>SESSIONS</span>
-                <span>0900</span>
-              </div>
-              
-              <div className="card-footer">
-                <div className="cardholder">
-                  <span className="label">WELLNESS SESSION</span>
-                  <span className="value embossed text-white">ACUDETOX</span>
-                </div>
-                <div className="valid-thru">
-                  <span className="label">VALID THRU</span>
-                  <span className="value embossed text-white">BOOK NOW</span>
+    <section id="book" className="py-24 px-6 bg-[#eae4d9] relative z-10 transition-colors duration-300">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-heading italic mb-14 text-center text-charcoal">
+          {t('pricing.title')}
+        </h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Card on Left */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="card-universe-wrapper !p-0">
+              <div className="parallax-container">
+                {/* The tracking grid */}
+                <div className="tracker tr-1"></div>
+                <div className="tracker tr-2"></div>
+                <div className="tracker tr-3"></div>
+                <div className="tracker tr-4"></div>
+                <div className="tracker tr-5"></div>
+                <div className="tracker tr-6"></div>
+                <div className="tracker tr-7"></div>
+                <div className="tracker tr-8"></div>
+                <div className="tracker tr-9"></div>
+                
+                <div className="tilt-card text-left">
+                  <div className="glare"></div>
+                  <div className="card-front">
+                    <div className="card-header">
+                      <div className="text-white font-bold text-2xl tracking-widest">N$900</div>
+                      <svg className="nfc-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11 20a1 1 0 0 1-1-1v-4a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1zm4-6a1 1 0 0 1-1-1v-6a1 1 0 1 1 2 0v6a1 1 0 0 1-1 1zm-8 4a1 1 0 0 1-1-1V9a1 1 0 1 1 2 0v8a1 1 0 0 1-1 1zm12-8a1 1 0 0 1-1-1V5a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1z" />
+                      </svg>
+                    </div>
+                    
+                    <div className="chip-container">
+                      <div className="chip">
+                        <div className="chip-line"></div>
+                        <div className="chip-line"></div>
+                        <div className="chip-line"></div>
+                        <div className="chip-main"></div>
+                      </div>
+                      <div className="card-type uppercase">PACKAGE</div>
+                    </div>
+                    
+                    <div className="card-numbers embossed text-white">
+                      <span>2x</span>
+                      <span>SESSIONS</span>
+                      <span>0900</span>
+                    </div>
+                    
+                    <div className="card-footer">
+                      <div className="cardholder">
+                        <span className="label">WELLNESS SESSION</span>
+                        <span className="value embossed text-white">ACUDETOX</span>
+                      </div>
+                      <div className="valid-thru">
+                        <span className="label">VALID THRU</span>
+                        <span className="value embossed text-white">BOOK NOW</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const BookYourSession = () => {
-  const { t } = useLanguage();
-  return (
-    <section id="book" className="py-24 px-6 bg-[#EAE5D9] relative z-10">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl md:text-5xl text-center mb-16 text-charcoal">
-          <span className="font-sans font-medium">{t('book.title.part1')}</span>{' '}
-          <span className="font-serif italic">{t('book.title.part2')}</span>
-        </h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Booking Widget Placeholder */}
-          <div className="bg-white rounded-3xl p-8 border border-sage/10 min-h-[500px] flex items-center justify-center text-charcoal/40 border-dashed">
-            [EMBED SIMPLYBOOK.ME / FRESHA WIDGET HERE]
+            <p className="mt-4 text-xs tracking-wider uppercase text-charcoal/50 font-medium">
+              {t('pricing.desc')}
+            </p>
           </div>
 
-          {/* Payment Section */}
-          <div className="flex flex-col justify-center gap-10">
+          {/* Payment Options on Right */}
+          <div className="flex flex-col justify-center gap-8 bg-[#ece7dd]/90 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-charcoal/10 shadow-[0_12px_32px_-8px_rgba(45,49,46,0.12),0_4px_12px_-2px_rgba(45,49,46,0.06)] transition-all duration-300 hover:shadow-[0_16px_36px_-6px_rgba(45,49,46,0.15),0_6px_16px_-2px_rgba(45,49,46,0.08)]">
+            {/* Pay via Card */}
             <div>
-              <h3 className="text-xl font-serif mb-4">{t('book.card')}</h3>
+              <h3 className="text-2xl font-heading italic mb-3 text-charcoal flex items-center gap-2">
+                <span>{t('book.card')}</span>
+              </h3>
+              <p className="text-sm text-charcoal/70 mb-4 leading-relaxed">
+                Secure online payment for the complete 2-session wellness package.
+              </p>
               <a 
-                href="#" 
-                className="inline-block border border-terracotta text-terracotta px-8 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors shadow-sm hover:shadow-md"
+                href="#pay-card" 
+                id="pay-via-card-btn"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto border-2 border-terracotta bg-terracotta text-cream px-8 py-3 rounded-full hover:bg-transparent hover:text-terracotta transition-all duration-300 font-medium shadow-sm hover:shadow-md cursor-pointer"
               >
-                [LINK TO PAYMENT GATEWAY CHECKOUT URL]
+                <span>{t('book.card')}</span>
+                <span className="font-mono text-xs opacity-90">(N$900)</span>
               </a>
             </div>
 
-            <div className="border-t border-sage/20 pt-10">
-              <h3 className="text-xl font-serif mb-4">{t('book.ewallet')}</h3>
-              <div className="bg-white p-6 rounded-2xl border border-sage/10">
-                <p className="text-charcoal/70 mb-2">{t('book.ewallet.desc')}</p>
-                <p className="text-2xl font-mono text-charcoal mb-6">[INSERT E-WALLET NUMBER]</p>
+            <div className="border-t border-charcoal/10 pt-6">
+              {/* Pay via E-Wallet */}
+              <h3 className="text-2xl font-heading italic mb-3 text-charcoal">
+                {t('book.ewallet')}
+              </h3>
+              <div className="bg-[#f7f5f0]/95 p-5 rounded-2xl border border-charcoal/10 shadow-[0_2px_8px_rgba(45,49,46,0.04)]">
+                <p className="text-xs uppercase tracking-wider text-charcoal/60 mb-1">{t('book.ewallet.desc')}</p>
+                <p className="text-xl sm:text-2xl font-mono text-charcoal font-semibold mb-4 tracking-wider">[INSERT E-WALLET NUMBER]</p>
                 <a 
-                  href="mailto:placeholder@email.com?subject=Proof of Payment" 
-                  className="inline-block bg-sage text-cream px-6 py-2 rounded-full text-sm hover:bg-sage/90 transition-colors shadow-sm hover:shadow-md"
+                  href="mailto:placeholder@email.com?subject=Proof of Payment - Acudetox" 
+                  className="inline-block border-2 border-sage bg-sage text-cream px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold hover:bg-transparent hover:text-sage transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
                 >
                   {t('book.ewallet.proof')}
                 </a>
@@ -289,7 +264,7 @@ const LocationHours = () => {
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl mb-10 text-charcoal">
           <span className="font-sans font-medium">{t('location.title.part1')}</span>{' '}
-          <span className="font-serif italic">{t('location.title.part2')}</span>
+          <span className="font-heading italic">{t('location.title.part2')}</span>
         </h2>
         <div className="space-y-6 text-lg text-charcoal/80">
           <div>
@@ -328,21 +303,6 @@ const LocationHours = () => {
   );
 };
 
-const Footer = () => {
-  return (
-    <footer className="py-12 px-6 border-t border-sage/20 text-center bg-terracotta text-cream relative z-10">
-      <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="font-serif italic text-xl text-cream">Sessions with Chanty</div>
-        <div className="flex gap-6 text-sm">
-          <a href="#" className="hover:text-cream/80 transition-colors">[PHONE]</a>
-          <a href="#" className="hover:text-cream/80 transition-colors">[EMAIL]</a>
-          <a href="#" className="hover:text-cream/80 transition-colors">[WHATSAPP]</a>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
 const MainContent = () => {
   return (
     <div className="relative min-h-screen p-4 md:p-8">
@@ -351,14 +311,14 @@ const MainContent = () => {
         <BackgroundTexture />
         <Nav />
         <Hero />
-        <AnimationSequence />
+        <SpotlightReveal />
         
         <div className="border-t border-charcoal/10">
           <WhatIsAcudetox />
         </div>
         
-        <div className="border-t border-charcoal/10">
-          <Benefits />
+        <div className="border-t border-charcoal/10 overflow-hidden">
+          <BenefitsSection />
         </div>
         
         <div className="border-t border-charcoal/10">
@@ -367,10 +327,6 @@ const MainContent = () => {
         
         <div className="border-t border-charcoal/10">
           <Pricing />
-        </div>
-        
-        <div className="border-t border-charcoal/10">
-          <BookYourSession />
         </div>
         
         <div className="border-t border-charcoal/10">
