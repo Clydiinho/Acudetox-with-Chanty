@@ -1,5 +1,6 @@
 import React from 'react';
 import { FadingVideo } from './FadingVideo';
+import { GlassCard3D } from './GlassCard3D';
 
 interface CardData {
   image: string;
@@ -66,30 +67,30 @@ export const BenefitsSection: React.FC = () => {
         {/* Four cards lifted to slightly overlap the main object in the video */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 md:mt-16 -translate-y-4 sm:-translate-y-8 md:-translate-y-12 lg:-translate-y-16">
           {BENEFITS_DATA.map((card, idx) => (
-            <div
+            <GlassCard3D
               key={idx}
-              className="liquid-glass rounded-[1.25rem] p-4 sm:p-5 flex flex-col justify-between aspect-square min-h-[300px] w-full"
+              className="liquid-glass rounded-[1.25rem] p-4 sm:p-5 flex flex-col justify-between aspect-square min-h-[300px] w-full cursor-pointer select-none"
             >
-              {/* Image at the top */}
-              <div className="w-full aspect-[16/10] shrink-0 min-h-0 overflow-hidden rounded-[0.75rem]">
+              {/* Image at the top with subtle inner float */}
+              <div className="w-full aspect-[16/10] shrink-0 min-h-0 overflow-hidden rounded-[0.75rem] relative">
                 <img
                   src={card.image}
                   alt={card.alt}
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
                 />
               </div>
 
               {/* Title and description placed close to the bottom */}
-              <div className="mt-auto pt-3 flex flex-col">
-                <h3 className="font-heading italic text-white text-xl sm:text-2xl xl:text-[1.65rem] tracking-[-0.015em] leading-[1.15]">
+              <div className="mt-auto pt-3 flex flex-col transition-transform duration-300 ease-out group-hover/card:translate-y-[-2px]">
+                <h3 className="font-heading italic text-white text-xl sm:text-2xl xl:text-[1.65rem] tracking-[-0.015em] leading-[1.15] drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-xs sm:text-[0.8125rem] text-white/80 font-body font-light leading-relaxed">
+                <p className="mt-2 text-xs sm:text-[0.8125rem] text-white/80 group-hover/card:text-white/95 font-body font-light leading-relaxed transition-colors duration-300">
                   {card.body}
                 </p>
               </div>
-            </div>
+            </GlassCard3D>
           ))}
         </div>
       </div>
